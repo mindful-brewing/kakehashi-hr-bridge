@@ -1,0 +1,777 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Kakehashi HR Bridge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,500&display=swap">
+
+<style>
+  :root {
+    --paper: #F5F4EF;
+    --paper-raised: #FCFBF8;
+    --ink: #1E2933;
+    --ink-soft: #52626D;
+    --ink-faint: #7C8991;
+    --indigo: #2F4C68;
+    --indigo-deep: #1B2F42;
+    --marigold: #C97C2E;
+    --marigold-deep: #A5611D;
+    --mist: #D7D4C9;
+    --mist-soft: #EAE8E1;
+    --line: rgba(30, 41, 51, 0.12);
+    --shadow: rgba(27, 47, 66, 0.10);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #141A20;
+      --paper-raised: #1B232B;
+      --ink: #ECE9E2;
+      --ink-soft: #ABB6BC;
+      --ink-faint: #7E8B92;
+      --indigo: #86A9C7;
+      --indigo-deep: #B9D0E3;
+      --marigold: #E29A54;
+      --marigold-deep: #F0B073;
+      --mist: #37424B;
+      --mist-soft: #232C34;
+      --line: rgba(236, 233, 226, 0.14);
+      --shadow: rgba(0, 0, 0, 0.35);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #141A20;
+    --paper-raised: #1B232B;
+    --ink: #ECE9E2;
+    --ink-soft: #ABB6BC;
+    --ink-faint: #7E8B92;
+    --indigo: #86A9C7;
+    --indigo-deep: #B9D0E3;
+    --marigold: #E29A54;
+    --marigold-deep: #F0B073;
+    --mist: #37424B;
+    --mist-soft: #232C34;
+    --line: rgba(236, 233, 226, 0.14);
+    --shadow: rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+    font-size: 16px;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 {
+    font-family: "Shippori Mincho", "Hiragino Mincho ProN", serif;
+    font-weight: 600;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+
+  .en {
+    font-family: "Fraunces", "Times New Roman", serif;
+    font-style: italic;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- Header ---------- */
+  header.site {
+    padding: 28px 0 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .site-bar {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .brandmark {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+  .brandmark .mark {
+    font-family: "Shippori Mincho", serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .brandmark .sub {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  nav.site-nav {
+    display: flex;
+    gap: 28px;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+  nav.site-nav a { text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 2px; }
+  nav.site-nav a:hover { border-bottom-color: var(--marigold); color: var(--ink); }
+  nav.site-nav a:focus-visible, .btn:focus-visible, .track-cta:focus-visible {
+    outline: 2px solid var(--marigold);
+    outline-offset: 3px;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding: 64px 0 56px;
+  }
+  .eyebrow {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--marigold-deep);
+    letter-spacing: 0.02em;
+    margin: 0 0 18px;
+  }
+  .hero h1 {
+    font-size: clamp(1.9rem, 4.2vw, 2.9rem);
+    line-height: 1.45;
+    margin: 0 0 26px;
+    max-width: 15ch;
+  }
+  .hero-lede {
+    max-width: 56ch;
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    margin: 0 0 34px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+  }
+  @media (max-width: 800px) {
+    .hero-grid { grid-template-columns: 1fr; }
+  }
+
+  .bridge-art { width: 100%; height: auto; }
+
+  .cta-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--indigo-deep);
+    color: var(--paper-raised);
+    text-decoration: none;
+    font-size: 0.95rem;
+    letter-spacing: 0.01em;
+    padding: 14px 26px;
+    border-radius: 2px;
+    transition: background 0.15s ease, transform 0.15s ease;
+  }
+  .btn:hover { background: var(--marigold-deep); transform: translateY(-1px); }
+  .btn-note {
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+  }
+  .copy-hint {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    margin-top: 10px;
+    max-width: 48ch;
+  }
+  .copy-email-btn { border: none; cursor: pointer; font-family: inherit; }
+  .btn.copy-email-btn.copied { background: var(--marigold-deep); }
+  .track-cta.copy-email-btn { background: none; }
+  .track-cta.copy-email-btn.copied { opacity: 0.6; }
+
+  .credential-strip {
+    margin-top: 44px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 28px;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+  }
+  .credential-strip span.tag {
+    white-space: nowrap;
+  }
+  .credential-strip span.tag::before {
+    content: "";
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--marigold);
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+
+  /* ---------- Section shell ---------- */
+  section { padding: 72px 0; }
+  section.alt { background: var(--paper-raised); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .section-head { max-width: 62ch; margin-bottom: 44px; }
+  .section-head .eyebrow { margin-bottom: 10px; }
+  .section-head h2 { font-size: clamp(1.5rem, 3vw, 2rem); margin: 0 0 14px; }
+  .section-head p { color: var(--ink-soft); margin: 0; font-size: 1rem; max-width: 58ch; }
+
+  /* ---------- Pain points ---------- */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+  @media (max-width: 700px) { .pain-grid { grid-template-columns: 1fr; } }
+  .pain-item {
+    background: var(--paper);
+    padding: 26px 28px;
+    font-size: 0.98rem;
+    color: var(--ink-soft);
+    display: flex;
+    gap: 16px;
+  }
+  .pain-item .glyph {
+    flex: none;
+    width: 22px; height: 22px;
+    margin-top: 2px;
+  }
+
+  /* ---------- Timeline ---------- */
+  .bio-intro {
+    max-width: 62ch;
+    font-size: 1.02rem;
+    color: var(--ink-soft);
+    margin-bottom: 48px;
+  }
+  .bio-intro strong { color: var(--ink); font-weight: 500; }
+
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+    border-left: 1px solid var(--mist);
+  }
+  .tl-item {
+    position: relative;
+    padding-bottom: 40px;
+  }
+  .tl-item:last-child { padding-bottom: 0; }
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: -32.5px;
+    top: 4px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--marigold);
+    box-shadow: 0 0 0 4px var(--paper);
+  }
+  .tl-item.alt::before { background: var(--indigo); }
+  .tl-year {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    color: var(--indigo);
+    font-size: 0.95rem;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .tl-role { font-weight: 700; font-size: 1.05rem; margin: 0 0 6px; }
+  .tl-desc { color: var(--ink-soft); font-size: 0.95rem; max-width: 60ch; margin: 0; }
+
+  .bio-close {
+    margin-top: 44px;
+    padding: 26px 30px;
+    background: var(--paper-raised);
+    border-left: 3px solid var(--marigold);
+    font-size: 1rem;
+    color: var(--ink);
+    max-width: 68ch;
+  }
+
+  /* ---------- Tracks ---------- */
+  .track-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  @media (max-width: 800px) { .track-grid { grid-template-columns: 1fr; } }
+
+  .track-card {
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    padding: 36px 34px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  .track-card.b { border-top: 3px solid var(--marigold); }
+  .track-card.a { border-top: 3px solid var(--indigo); }
+
+  .track-label {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .track-label .name {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: var(--ink-faint);
+  }
+  .track-card h3 { font-size: 1.4rem; margin: 0; line-height: 1.5; }
+  .track-sub { font-size: 0.88rem; color: var(--ink-faint); margin-top: -14px; }
+
+  .track-for {
+    font-size: 0.92rem;
+    color: var(--ink-soft);
+  }
+  .track-for .k { color: var(--ink); font-weight: 700; }
+  .track-for ul { margin: 8px 0 0; padding-left: 1.1em; }
+  .track-for li { margin-bottom: 4px; }
+
+  .track-includes {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.94rem;
+  }
+  .track-includes li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .track-includes li::before {
+    content: "";
+    flex: none;
+    width: 5px; height: 5px;
+    margin-top: 9px;
+    background: var(--ink-faint);
+  }
+
+  .track-price-block {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .price {
+    font-family: "Fraunces", serif;
+    font-weight: 500;
+    font-size: 1.9rem;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  .price small {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--ink-faint);
+    margin-left: 6px;
+  }
+  .price-note {
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    margin-top: 6px;
+  }
+
+  .track-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 18px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    color: var(--indigo-deep);
+    border-bottom: 1px solid var(--indigo-deep);
+    padding-bottom: 2px;
+    width: fit-content;
+  }
+  .track-card.b .track-cta { color: var(--marigold-deep); border-color: var(--marigold-deep); }
+  .track-cta:hover { opacity: 0.7; }
+
+  /* ---------- Process ---------- */
+  .process {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  @media (max-width: 800px) { .process { grid-template-columns: 1fr; } }
+  .process-step { padding-top: 4px; }
+  .process-num {
+    font-family: "Fraunces", serif;
+    font-style: italic;
+    color: var(--marigold);
+    font-size: 1.6rem;
+    display: block;
+    margin-bottom: 10px;
+  }
+  .process-step h4 { margin: 0 0 8px; font-size: 1.05rem; font-family: "Zen Kaku Gothic New", sans-serif; font-weight: 700; }
+  .process-step p { margin: 0; color: var(--ink-soft); font-size: 0.92rem; }
+
+  /* ---------- Impact note ---------- */
+  .impact-note {
+    margin-top: 18px;
+    padding: 16px 20px;
+    background: var(--paper-raised);
+    border-left: 3px solid var(--indigo);
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Final CTA ---------- */
+  .final-cta {
+    text-align: center;
+    padding: 88px 0 96px;
+  }
+  .final-cta h2 { font-size: clamp(1.6rem, 3.4vw, 2.3rem); margin: 0 0 18px; }
+  .final-cta p { color: var(--ink-soft); max-width: 50ch; margin: 0 auto 34px; }
+  .final-cta .btn { padding: 16px 34px; font-size: 1rem; }
+
+  footer.site {
+    border-top: 1px solid var(--line);
+    padding: 36px 0;
+  }
+  .footer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+  }
+  .footer-row a { text-decoration: underline; text-underline-offset: 3px; color: var(--ink-soft); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn { transition: none; }
+  }
+</style>
+
+<header class="site">
+  <div class="wrap site-bar">
+    <div class="brandmark">
+      <span class="mark">架け橋</span>
+      <span class="sub">Kakehashi — HR Bridge</span>
+    </div>
+    <nav class="site-nav">
+      <a href="#service">サービス内容</a>
+      <a href="#about">直野美奈について</a>
+      <a href="#contact">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Japan × India, Organizational Bridge</p>
+      <h1>日本とインド、<br>働き方の「あいだ」を設計する。</h1>
+      <p class="hero-lede">
+        採用・オンボーディング・マネジメントの現場で起きる摩擦を、実務経験にもとづいて言語化し、解決策に変える。
+        外資系グローバル企業での組織開発と、インドの現地チームと向き合った実務経験をあわせ持つ、直野美奈による日印HRブリッジサービスです。
+      </p>
+      <div class="cta-row">
+        <a class="btn" href="https://www.paypal.com/ncp/payment/RLLGBZPUB5KYW" target="_blank" rel="noopener">
+          初回相談を予約する（¥1,000）
+        </a>
+        <span class="btn-note">30分・オンライン・全額インド理工系学生×日本の地域留学支援プロジェクトへ</span>
+      </div>
+      <p class="copy-hint">お支払い後は、<a href="https://calendar.app.google/EaCnokQRJ9x25yMR8" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:3px;">こちらのカレンダー</a>からご都合の良い日時をご予約ください。</p>
+
+      <div class="credential-strip">
+        <span class="tag">外資系EVメーカー 戦略人事HRBP</span>
+        <span class="tag">外資系シェアリングエコノミー企業 グローバル採用面接官</span>
+        <span class="tag">日系大手メーカーのインド法人 組織開発</span>
+      </div>
+    </div>
+
+    <div>
+      <svg class="bridge-art" viewBox="0 0 480 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="日本とインドをつなぐ橋を象徴する線画">
+        <line x1="40" y1="210" x2="440" y2="210" stroke="var(--ink)" stroke-width="2" opacity="0.55"/>
+        <line x1="150" y1="210" x2="150" y2="70" stroke="var(--ink)" stroke-width="2" opacity="0.55"/>
+        <line x1="330" y1="210" x2="330" y2="70" stroke="var(--ink)" stroke-width="2" opacity="0.55"/>
+        <line x1="150" y1="70" x2="330" y2="70" stroke="var(--ink)" stroke-width="2" opacity="0.55"/>
+        <g stroke="var(--indigo)" stroke-width="1.3" opacity="0.8">
+          <line x1="150" y1="70" x2="60" y2="210"/>
+          <line x1="150" y1="70" x2="95" y2="210"/>
+          <line x1="150" y1="70" x2="130" y2="210"/>
+          <line x1="150" y1="70" x2="150" y2="210"/>
+          <line x1="150" y1="70" x2="185" y2="210"/>
+          <line x1="150" y1="70" x2="220" y2="210"/>
+        </g>
+        <g stroke="var(--marigold)" stroke-width="1.3" opacity="0.85">
+          <line x1="330" y1="70" x2="260" y2="210"/>
+          <line x1="330" y1="70" x2="295" y2="210"/>
+          <line x1="330" y1="70" x2="330" y2="210"/>
+          <line x1="330" y1="70" x2="365" y2="210"/>
+          <line x1="330" y1="70" x2="400" y2="210"/>
+          <line x1="330" y1="70" x2="420" y2="210"/>
+        </g>
+        <circle cx="40" cy="210" r="7" fill="var(--indigo)"/>
+        <circle cx="440" cy="210" r="7" fill="var(--marigold)"/>
+        <text x="40" y="238" font-family="Fraunces, serif" font-style="italic" font-size="14" fill="var(--ink-soft)" text-anchor="middle">JP</text>
+        <text x="440" y="238" font-family="Fraunces, serif" font-style="italic" font-size="14" fill="var(--ink-soft)" text-anchor="middle">IN</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">こんな課題はありませんか</p>
+      <h2>橋がかかっていない場所で、摩擦が起きている。</h2>
+      <p>日印間のビジネスやチーム運営でよく耳にするのは、「悪気はないのに、噛み合わない」という声です。</p>
+    </div>
+    <div class="pain-grid">
+      <div class="pain-item">
+        <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="var(--marigold)" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <div>インド進出やインド人材の採用を進めたいが、定着・オンボーディングの設計に自信が持てない</div>
+      </div>
+      <div class="pain-item">
+        <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="var(--marigold)" stroke-width="1.6"><path d="M4 12h16M4 6h16M4 18h10"/></svg>
+        <div>インドチームとのマネジメントで、指示の伝わり方や期待値のズレが繰り返し起きている</div>
+      </div>
+      <div class="pain-item">
+        <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="var(--marigold)" stroke-width="1.6"><circle cx="9" cy="9" r="3"/><circle cx="17" cy="15" r="3"/><path d="M11 10l4 4"/></svg>
+        <div>日本で働くインド人プロフェッショナルが、職場の暗黙のルールに馴染めず孤立している</div>
+      </div>
+      <div class="pain-item">
+        <svg class="glyph" viewBox="0 0 24 24" fill="none" stroke="var(--marigold)" stroke-width="1.6"><path d="M4 4l16 16M20 4L4 20"/></svg>
+        <div>相手を尊重したいのに、何がすれ違いの原因か、社内に言語化できる人がいない</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">なぜ直野美奈か</p>
+      <h2>組織開発の現場と、インドでの実務経験。両方を持つ人は、日本に多くありません。</h2>
+    </div>
+
+    <p class="bio-intro">
+      直野美奈は、<strong>外資系シェアリングエコノミー企業</strong>と<strong>外資系EVメーカーの日本法人</strong>という、組織文化とグローバル採用の第一線で人事のキャリアを積み、
+      2024年からは<strong>日系大手メーカーのインド法人</strong>の組織開発の実務にあたってきました。
+      「本で読んだインド」ではなく、「インドの組織と実際に向き合ってきたHR実務経験」が、このサービスの土台です。
+    </p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <span class="tl-year">2016 — 外資系シェアリングエコノミー企業（日本法人）</span>
+        <p class="tl-role">役員秘書 / コミュニティ運営 / グローバル採用面接官</p>
+        <p class="tl-desc">世界中から集まる候補者と向き合う採用面接官として、「異なる背景を前提に人を見る」姿勢の基礎を築く。</p>
+      </div>
+      <div class="tl-item alt">
+        <span class="tl-year">2019 — 外資系コワーキングスペース企業（日本法人）</span>
+        <p class="tl-role">コミュニティ戦略・拠点運営</p>
+        <p class="tl-desc">多国籍なメンバーが日々出入りする拠点で、現場のコミュニティ運営とオペレーションを担う。</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">2020 — 外資系フードデリバリー企業（日本法人）</span>
+        <p class="tl-role">CRM・コミュニティ</p>
+        <p class="tl-desc">グローバル本社の方針と、日本の現場の実情をつなぐ役割を経験。</p>
+      </div>
+      <div class="tl-item alt">
+        <span class="tl-year">2021 — 外資系EVメーカー（日本法人）</span>
+        <p class="tl-role">戦略人事HRBP（組織文化・ウェルビーイング・D&I・CSR）</p>
+        <p class="tl-desc">グローバル企業の人事戦略を、日本の組織に実装する仕事に従事。制度ではなく「現場でどう機能させるか」を担当。</p>
+      </div>
+      <div class="tl-item">
+        <span class="tl-year">2024 — 日系大手メーカーのインド法人</span>
+        <p class="tl-role">組織開発・プロセス改善</p>
+        <p class="tl-desc">インドの現地チームと直接向き合い、組織課題をマネジメント側から内側から見る経験を積む。</p>
+      </div>
+    </div>
+
+    <p class="bio-close">
+      外資系グローバル企業での組織開発の視点と、インドの現地チームと向き合った実務。この二つが重なる経歴は、日印間のHRブリッジという分野において、
+      「本業として本気で向き合える」数少ない立場だと考えています。
+    </p>
+  </div>
+</section>
+
+<section class="alt" id="service">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">サービス内容</p>
+      <h2>組織向けの「診断」と、個人向けの「1on1」。二つの入口を用意しています。</h2>
+      <p>どちらも、まずは小さく・低リスクに始められる設計にしています。</p>
+    </div>
+
+    <div class="track-grid">
+      <div class="track-card a">
+        <div class="track-label">
+          <h3>組織開発診断パッケージ</h3>
+          <span class="name">Track A</span>
+        </div>
+        <p class="track-sub">Organizational Readiness Diagnostic</p>
+
+        <div class="track-for">
+          <span class="k">こんな企業へ</span>
+          <ul>
+            <li>日本企業で、インド進出やインド人材の採用を検討している</li>
+            <li>インド企業で、日本市場・日本人材との協業を検討している</li>
+          </ul>
+        </div>
+
+        <ul class="track-includes">
+          <li>経営層・現場メンバーへのヒアリング</li>
+          <li>組織・カルチャーギャップの分析</li>
+          <li>摩擦ポイントを特定した診断レポート（文書）</li>
+          <li>採用・オンボーディング・マネジメント実務への具体的な提言</li>
+          <li>期間の目安：2週間</li>
+        </ul>
+
+        <div class="track-price-block">
+          <span class="price">¥150,000<small>〜（税別・内容に応じて〜¥300,000）</small></span>
+          <p class="price-note">スコープを固定した定額制。まずは小さく始められます。</p>
+        </div>
+
+        <button type="button" class="track-cta copy-email-btn" data-email="mina@mindful-brewing.com" data-subject="【架け橋】Track A（組織開発診断）のご相談">
+            Track Aについて相談する →
+        </button>
+      </div>
+
+      <div class="track-card b">
+        <div class="track-label">
+          <h3>1on1コーチング</h3>
+          <span class="name">Track B</span>
+        </div>
+        <p class="track-sub">Individual Coaching Sessions</p>
+
+        <div class="track-for">
+          <span class="k">こんな方へ</span>
+          <ul>
+            <li>日本で働く・働く予定のインド人プロフェッショナル</li>
+            <li>インドチームをマネジメントする日本人マネージャー</li>
+          </ul>
+        </div>
+
+        <ul class="track-includes">
+          <li>60〜90分 / 1セッション</li>
+          <li>日本語・英語どちらにも対応</li>
+          <li>職場文化・コミュニケーション・異文化マネジメントの実践コーチング</li>
+          <li>初回相談は¥1,000（お互いに合うかを確認する時間です）</li>
+        </ul>
+
+        <div class="track-price-block">
+          <span class="price">¥15,000<small>〜¥30,000 / セッション</small></span>
+          <p class="price-note">初回相談は¥1,000。2回目以降のセッションから通常料金となります。</p>
+          <p class="impact-note">初回相談料の¥1,000は、全額「インド理工系学生×日本の地域留学支援プロジェクト」に充当されます。</p>
+        </div>
+
+        <a class="track-cta" href="https://www.paypal.com/ncp/payment/RLLGBZPUB5KYW" target="_blank" rel="noopener">
+            初回相談を予約する（¥1,000）→
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Track A の進め方</p>
+      <h2>2週間で、現場に持ち帰れる提言まで。</h2>
+    </div>
+    <div class="process">
+      <div class="process-step">
+        <span class="process-num">01</span>
+        <h4>ヒアリング</h4>
+        <p>経営層と現場メンバーの双方に、個別ヒアリングを実施。制度と実態の両面から状況を把握します。</p>
+      </div>
+      <div class="process-step">
+        <span class="process-num">02</span>
+        <h4>分析・言語化</h4>
+        <p>ヒアリング内容を、組織開発の枠組みで整理。摩擦の構造と背景要因を可視化します。</p>
+      </div>
+      <div class="process-step">
+        <span class="process-num">03</span>
+        <h4>レポート・提言</h4>
+        <p>診断レポートを納品し、フィードバックセッションで実務に落とし込むところまで伴走します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final-cta alt" id="contact">
+  <div class="wrap">
+    <h2>まずは、初回相談から。</h2>
+    <p>
+      Track A・Track Bどちらが合うかのご相談も歓迎します。初回相談料の¥1,000は、全額「インド理工系学生×日本の地域留学支援プロジェクト」に充当されます。
+    </p>
+    <a class="btn" href="https://www.paypal.com/ncp/payment/RLLGBZPUB5KYW" target="_blank" rel="noopener">
+      初回相談を予約する（¥1,000）
+    </a>
+    <p class="copy-hint">お支払い後、<button type="button" class="copy-email-btn" data-email="mina@mindful-brewing.com" data-subject="【架け橋】初回相談の日程調整" style="background:none;border:none;padding:0;color:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font:inherit;">mina@mindful-brewing.com</button> までご都合の良い日時をご連絡ください。</p>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap footer-row">
+    <span>架け橋 -Kakehashi- HR Bridge / Mina Naono</span>
+    <button type="button" class="copy-email-btn" data-email="mina@mindful-brewing.com" data-subject="【架け橋】お問い合わせ" style="background:none;padding:0;color:inherit;text-decoration:underline;text-underline-offset:3px;">mina@mindful-brewing.com</button>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.copy-email-btn').forEach(function (btn) {
+  var originalText = btn.textContent;
+  btn.addEventListener('click', function () {
+    var email = btn.getAttribute('data-email');
+    var finish = function () {
+      btn.classList.add('copied');
+      btn.textContent = 'コピーしました ✓';
+      setTimeout(function () {
+        btn.classList.remove('copied');
+        btn.textContent = originalText;
+      }, 2200);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(email).then(finish).catch(function () {
+        fallbackCopy(email);
+        finish();
+      });
+    } else {
+      fallbackCopy(email);
+      finish();
+    }
+  });
+});
+
+function fallbackCopy(text) {
+  var ta = document.createElement('textarea');
+  ta.value = text;
+  ta.style.position = 'fixed';
+  ta.style.opacity = '0';
+  document.body.appendChild(ta);
+  ta.focus();
+  ta.select();
+  try { document.execCommand('copy'); } catch (e) {}
+  document.body.removeChild(ta);
+}
+</script>
+
+</body></html>
