@@ -215,6 +215,9 @@
   .credential-strip span.tag {
     white-space: nowrap;
   }
+  @media (max-width: 480px) {
+    .credential-strip span.tag { white-space: normal; }
+  }
   .credential-strip span.tag::before {
     content: "";
     display: inline-block;
